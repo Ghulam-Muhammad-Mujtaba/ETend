@@ -1,4 +1,6 @@
 using ETend.DataAccess.Data;
+using ETend.DataAccess.Repository;
+using ETend.DataAccess.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 
 namespace ETend
@@ -15,7 +17,7 @@ namespace ETend
 			builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
 	builder.Configuration.GetConnectionString("DefaultConnection")
 	));
-
+			builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 			var app = builder.Build();
 

@@ -18,7 +18,6 @@
   <ItemGroup>
     <Folder Include="Areas\Driver\Controllers\" />
     <Folder Include="Areas\Retailer\Controllers\" />
-    <Folder Include="Areas\Admin\Controllers\" />
   </ItemGroup>
 
   <ItemGroup>
