@@ -1,0 +1,61 @@
+﻿@model ETend.Models.ViewModels.HouseVM
+
+<form method="post" asp-action="Upsert">
+	<input asp-for="House.Id" hidden />
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+				<div class="col-12 pb-2">
+					<h2 class="text-primary">@(Model.House.Id != 0 ? "Update" : "Create")  House</h2>
+					<hr />
+				</div>
+				@*<div asp-validation-summary="All"></div>*@
+				<div class="mb-3 col-10">
+					<label asp-for="House.AreaId"></label>
+					<select asp-for="House.AreaId" asp-items="@Model.AreaList" class="form-select">
+						<option disabled selected>--Select Area--</option>
+					</select>
+					<span asp-validation-for="House.AreaId" class="text-danger"></span>
+				</div>
+@*				<div class="mb-3 col-10">
+					<label asp-for="House.Area.Type"></label>
+					<input asp-for="House.Area.Type" class="form-control" />
+					<span asp-validation-for="House.Area.Type" class="text-danger"></span>
+				</div>*@
+				<div class="mb-3 col-10">
+					<label asp-for="House.Address"></label>
+					<input asp-for="House.Address" class="form-control" />
+					<span asp-validation-for="House.Address" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-10">
+					<label asp-for="House.PhoneNumber"></label>
+					<input asp-for="House.PhoneNumber" class="form-control" />
+					<span asp-validation-for="House.PhoneNumber" class="text-danger"></span>
+				</div>
+				<div class="col-12">
+					@if (Model.House.Id != 0)
+					{
+						<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+					}
+					else
+					{
+						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
+					}
+					<a asp-controller="House" asp-action="Index" class="btn btn-secondary" style="width:150px">
+						Back to List
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

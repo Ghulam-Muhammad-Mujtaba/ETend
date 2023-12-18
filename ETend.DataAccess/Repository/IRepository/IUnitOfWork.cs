@@ -9,6 +9,8 @@ namespace ETend.DataAccess.Repository.IRepository
 	public interface IUnitOfWork
 	{
 		IAreaRepository Area { get; }
+		IHouseRepository House { get; }
+		ICompanyRepository Company { get; }
 		void Save();
 	}
 }
