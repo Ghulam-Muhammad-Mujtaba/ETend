@@ -18,10 +18,12 @@ namespace ETend.DataAccess.Repository
 			Area = new AreaRepository(_db);
 			House= new HouseRepository(_db);
 			Company = new CompanyRepository(_db);
+			RetailShop = new RetailShopRepository(_db);
 		}
 		public IAreaRepository Area { get; private set; }
 		public IHouseRepository House { get; private set; }
 		public ICompanyRepository Company { get; private set; }
+		public IRetailShopRepository RetailShop { get; private set; }
 
 		public void Save()
 		{

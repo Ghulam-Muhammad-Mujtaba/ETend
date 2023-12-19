@@ -16,5 +16,6 @@ namespace ETend.DataAccess.Data
 		public DbSet<Area> Areas { get; set; }
 		public DbSet<House> Houses { get; set; }
 		public DbSet<Company> Companies { get; set; }
+		public DbSet<RetailShop> RetailShops { get; set; }
 	}
 }

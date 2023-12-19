@@ -7,27 +7,26 @@ using Microsoft.Extensions.Hosting;
 
 namespace ETend.Areas.Retailer.Controllers
 {
-    [Area("Retailer")]
-    public class CompanyController : Controller
+    [Area("Admin")]
+    public class RetailShopController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
 
-        public CompanyController(IUnitOfWork unitOfWork)
+        public RetailShopController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
-
         public IActionResult Index()
         {
-            IEnumerable<Company> objCompanyList = _unitOfWork.Company.GetAll();
-            return View(objCompanyList);
+            IEnumerable<RetailShop> objRetailShopList = _unitOfWork.RetailShop.GetAll();
+            return View(objRetailShopList);
         }
         //GET
         public IActionResult Upsert(int? id)
         {
-            CompanyVM companyVM = new()
+            RetailShopVM retailshopVM = new()
             {
-                Company = new(),
+                RetailShop = new(),
                 AreaList = _unitOfWork.Area.GetAll().Select(i => new SelectListItem
                 {
                     Text = i.Name,
@@ -37,12 +36,12 @@ namespace ETend.Areas.Retailer.Controllers
 
             if (id == null || id == 0)
             {
-                return View(companyVM);
+                return View(retailshopVM);
             }
             else
             {
-                companyVM.Company = _unitOfWork.Company.GetFirstOrDefault(u => u.Id == id);
-                return View(companyVM);
+                retailshopVM.RetailShop = _unitOfWork.RetailShop.GetFirstOrDefault(u => u.Id == id);
+                return View(retailshopVM);
 
                 //update company
             }
@@ -51,22 +50,22 @@ namespace ETend.Areas.Retailer.Controllers
         //POST
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Upsert(CompanyVM obj)
+        public IActionResult Upsert(RetailShopVM obj)
         {
 
             if (ModelState.IsValid)
             {
                
-                if (obj.Company.Id == 0)
+                if (obj.RetailShop.Id == 0)
                 {
-                    _unitOfWork.Company.Add(obj.Company);
+                    _unitOfWork.RetailShop.Add(obj.RetailShop);
                 }
                 else
                 {
-                    _unitOfWork.Company.Update(obj.Company);
+                    _unitOfWork.RetailShop.Update(obj.RetailShop);
                 }
                 _unitOfWork.Save();
-                TempData["success"] = "Company created successfully";
+                TempData["success"] = "Retail Shop created successfully";
                 return RedirectToAction("Index");
             }
             return View(obj);
@@ -75,7 +74,7 @@ namespace ETend.Areas.Retailer.Controllers
 		[HttpGet]
 		public IActionResult GetAll()
 		{
-			var areaList = _unitOfWork.Company.GetAll(includeProperties: "Area");
+			var areaList = _unitOfWork.RetailShop.GetAll(includeProperties: "Area");
 			return Json(new { data = areaList });
 		}
 
@@ -83,13 +82,13 @@ namespace ETend.Areas.Retailer.Controllers
 		[HttpDelete]
 		public IActionResult Delete(int? id)
 		{
-			var obj = _unitOfWork.Company.GetFirstOrDefault(u => u.Id == id);
+			var obj = _unitOfWork.RetailShop.GetFirstOrDefault(u => u.Id == id);
 			if (obj == null)
 			{
 				return Json(new { success = false, message = "Error while deleting" });
 			}
 
-			_unitOfWork.Company.Remove(obj);
+			_unitOfWork.RetailShop.Remove(obj);
 			_unitOfWork.Save();
 			return Json(new { success = true, message = "Delete Successful" });
 

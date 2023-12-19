@@ -1,0 +1,65 @@
+﻿@model ETend.Models.ViewModels.RetailShopVM
+
+<form method="post" asp-action="Upsert">
+	<input asp-for="RetailShop.Id" hidden />
+
+	<div class="row">
+		<div class="col-10">
+			<div class="border p-3 mt-4 row">
+				<div class="col-12 pb-2">
+					<h2 class="text-primary">@(Model.RetailShop.Id != 0 ? "Update" : "Create")  Shop</h2>
+					<hr />
+				</div>
+				@*<div asp-validation-summary="All"></div>*@
+				<div class="mb-3 col-10">
+					<label asp-for="RetailShop.AreaId"></label>
+					<select asp-for="RetailShop.AreaId" asp-items="@Model.AreaList" class="form-select">
+						<option disabled selected>--Select Area--</option>
+					</select>
+					<span asp-validation-for="RetailShop.AreaId" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-10">
+					<label asp-for="RetailShop.ShopName"></label>
+					<input asp-for="RetailShop.ShopName" class="form-control" />
+					<span asp-validation-for="RetailShop.ShopName" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-10">
+					<label asp-for="RetailShop.ShopOwner"></label>
+					<input asp-for="RetailShop.ShopOwner" class="form-control" />
+					<span asp-validation-for="RetailShop.ShopOwner" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-10">
+					<label asp-for="RetailShop.ShopAddress"></label>
+					<input asp-for="RetailShop.ShopAddress" class="form-control" />
+					<span asp-validation-for="RetailShop.ShopAddress" class="text-danger"></span>
+				</div>
+				<div class="mb-3 col-10">
+					<label asp-for="RetailShop.PhoneNumber"></label>
+					<input asp-for="RetailShop.PhoneNumber" class="form-control" />
+					<span asp-validation-for="RetailShop.PhoneNumber" class="text-danger"></span>
+				</div>
+				<div class="col-12">
+					@if (Model.RetailShop.Id != 0)
+					{
+						<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+					}
+					else
+					{
+						<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+					}
+					<a asp-controller="RetailShop" asp-action="Index" class="btn btn-secondary" style="width:150px">
+						Back to List
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

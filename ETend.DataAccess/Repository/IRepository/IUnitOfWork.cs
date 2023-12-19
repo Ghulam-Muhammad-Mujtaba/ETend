@@ -11,6 +11,7 @@ namespace ETend.DataAccess.Repository.IRepository
 		IAreaRepository Area { get; }
 		IHouseRepository House { get; }
 		ICompanyRepository Company { get; }
+		IRetailShopRepository RetailShop { get; }
 		void Save();
 	}
 }
