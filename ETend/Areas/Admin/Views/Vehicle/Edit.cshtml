@@ -1,0 +1,41 @@
+﻿@model Vehicle
+
+<form method="post" asp-action="Edit">
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Edit Vehicle</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="VehicleName"></label>
+			<input asp-for="VehicleName" class="form-control" />
+			<span asp-validation-for="VehicleName" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="VehicleNo"></label>
+			<input asp-for="VehicleNo" class="form-control" />
+			<span asp-validation-for="VehicleNo" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Source"></label>
+			<input asp-for="Source" class="form-control" />
+			<span asp-validation-for="Source" class="text-danger"></span>
+		</div>
+		<div class="mb-3">
+			<label asp-for="Destination"></label>
+			<input asp-for="Destination" class="form-control" />
+			<span asp-validation-for="Destination" class="text-danger"></span>
+		</div>
+		<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+		<a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

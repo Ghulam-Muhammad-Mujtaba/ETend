@@ -1,0 +1,38 @@
+﻿@model Vehicle
+
+<form method="post" asp-action="Delete">
+	<input asp-for="Id" hidden />
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">Delete Vehicle</h2>
+			<hr />
+		</div>
+		@*<div asp-validation-summary="All"></div>*@
+		<div class="mb-3">
+			<label asp-for="VehicleName"></label>
+			<input asp-for="VehicleName" disabled class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="VehicleNo"></label>
+			<input asp-for="VehicleNo" disabled class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Source"></label>
+			<input asp-for="Source" disabled class="form-control" />
+		</div>
+		<div class="mb-3">
+			<label asp-for="Destination"></label>
+			<input asp-for="Destination" disabled class="form-control" />
+		</div>
+		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+		<a asp-controller="Vehicle" asp-action="Index" class="btn btn-secondary" style="width:150px">
+			Back to List
+		</a>
+	</div>
+</form>
+
+@section Scripts{
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}
