@@ -18,5 +18,6 @@ namespace ETend.DataAccess.Data
 		public DbSet<Company> Companies { get; set; }
 		public DbSet<RetailShop> RetailShops { get; set; }
 		public DbSet<Vehicle> Vehicles { get; set; }
+		public DbSet<Driver> Drivers { get; set; }
 	}
 }
