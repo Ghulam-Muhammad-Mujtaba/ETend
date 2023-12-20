@@ -1,4 +1,5 @@
 ﻿using ETend.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ETend.DataAccess.Data
 {
-	public class ApplicationDbContext:DbContext
+	public class ApplicationDbContext:IdentityDbContext
 	{
 		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
 		{
@@ -20,5 +21,6 @@ namespace ETend.DataAccess.Data
 		public DbSet<Vehicle> Vehicles { get; set; }
 		public DbSet<Driver> Drivers { get; set; }
 		public DbSet<Product> Products { get; set; }
+		public DbSet<Customer> Customers { get; set; }
 	}
 }

@@ -28,7 +28,7 @@ namespace ETend.Areas.Customer.Controllers
         {
             ShoppingCart shoppingCart = new()
             {
-                Count = 1,
+                Count = 3,
                 //ProductId = productId,
                 Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == productId),
             };
