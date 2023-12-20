@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Driver\Controllers\" />
+    <Folder Include="wwwroot\images\products\" />
   </ItemGroup>
 
   <ItemGroup>

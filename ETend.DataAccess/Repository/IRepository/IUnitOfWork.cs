@@ -14,6 +14,7 @@ namespace ETend.DataAccess.Repository.IRepository
 		IRetailShopRepository RetailShop { get; }
 		IVehicleRepository Vehicle { get; }
 		IDriverRepository Driver { get; }
+		IProductRepository Product { get; }
 		void Save();
 	}
 }

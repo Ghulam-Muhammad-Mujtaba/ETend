@@ -21,6 +21,7 @@ namespace ETend.DataAccess.Repository
 			RetailShop = new RetailShopRepository(_db);
 			Vehicle= new VehicleRepository(_db);
 			Driver = new DriverRepository(_db);
+			Product = new ProductRepository(_db);
 		}
 		public IAreaRepository Area { get; private set; }
 		public IHouseRepository House { get; private set; }
@@ -28,6 +29,7 @@ namespace ETend.DataAccess.Repository
 		public IRetailShopRepository RetailShop { get; private set; }
 		public IVehicleRepository Vehicle { get; private set; }
 		public IDriverRepository Driver { get; private set; }
+		public IProductRepository Product { get; private set; }
 
 		public void Save()
 		{
