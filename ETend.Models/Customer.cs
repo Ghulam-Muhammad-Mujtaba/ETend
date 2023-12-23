@@ -10,8 +10,7 @@ namespace ETend.Models
 {
     public class Customer : IdentityUser
     {
-        [Key]
-        public int Id { get; set; }
+
         [Required]
         public string Name { get; set; }
         public string? StreetAddress { get; set; }

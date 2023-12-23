@@ -29,38 +29,38 @@ namespace ETend.Areas.Customer.Controllers
             ShoppingCart shoppingCart = new()
             {
                 Count = 3,
-                //ProductId = productId,
+                ProductId = productId,
                 Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == productId),
             };
             return View(shoppingCart);
         }
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //[Authorize]
-        //public IActionResult Details(ShoppingCart shoppingCart)
-        //{
-        //    var claimsIdentity = (ClaimsIdentity)User.Identity;
-        //    var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
-        //    shoppingCart.ApplicationUserId = claim.Value;
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
+        public IActionResult Details(ShoppingCart shoppingCart)
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
+            shoppingCart.CustomerId = claim.Value;
 
-        //    ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.GetFirstOrDefault(
-        //        u => u.ApplicationUserId == claim.Value && u.ProductId == shoppingCart.ProductId);
+            ShoppingCart cartFromDb = _unitOfWork.ShoppingCart.GetFirstOrDefault(
+                u => u.CustomerId == claim.Value && u.ProductId == shoppingCart.ProductId);
 
-        //    if (cartFromDb == null)
-        //    {
-        //        _unitOfWork.ShoppingCart.Add(shoppingCart);
-        //        _unitOfWork.Save();
-        //        HttpContext.Session.SetInt32(SD.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.ApplicationUserId == claim.Value).ToList().Count);
-        //    }
-        //    else
-        //    {
-        //        _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
-        //        _unitOfWork.Save();
-        //    }
-        //    //_unitOfWork.Save();
+            if (cartFromDb == null)
+            {
+                _unitOfWork.ShoppingCart.Add(shoppingCart);
+                _unitOfWork.Save();
+                HttpContext.Session.SetInt32(ETend.Constants.Constants.SessionCart, _unitOfWork.ShoppingCart.GetAll(u => u.CustomerId == claim.Value).ToList().Count);
+            }
+            else
+            {
+                _unitOfWork.ShoppingCart.IncrementCount(cartFromDb, shoppingCart.Count);
+                _unitOfWork.Save();
+            }
+            //_unitOfWork.Save();
 
-        //    return RedirectToAction(nameof(Index));
-        //}
+            return RedirectToAction(nameof(Index));
+        }
         public IActionResult Privacy()
         {
             return View();

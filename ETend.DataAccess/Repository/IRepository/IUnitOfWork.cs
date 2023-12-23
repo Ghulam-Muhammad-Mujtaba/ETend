@@ -15,6 +15,10 @@ namespace ETend.DataAccess.Repository.IRepository
 		IVehicleRepository Vehicle { get; }
 		IDriverRepository Driver { get; }
 		IProductRepository Product { get; }
+		ICustomerRepository Customer { get; }
+		IShoppingCartRepository ShoppingCart { get; }
+		IOrderHeaderRepository OrderHeader { get; }
+		IOrderDetailRepository OrderDetail { get; }
 		void Save();
 	}
 }

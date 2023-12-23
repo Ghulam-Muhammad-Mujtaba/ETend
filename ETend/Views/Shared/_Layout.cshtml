@@ -25,21 +25,6 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
-                        @* <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Area" asp-action="Index">Area</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="RetailShop" asp-action="Index">Shop</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Vehicle" asp-action="Index">Vehicle</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Driver" asp-action="Index">Driver</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
-                        </li>*@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Content Managment</a>
                             <div class="dropdown-menu">
@@ -59,6 +44,11 @@
                                 <a class="nav-link text-dark" asp-area="Retailer" asp-controller="House" asp-action="Index">House</a>
                                 <a class="nav-link text-dark" asp-area="Retailer" asp-controller="Company" asp-action="Index">Company</a>
                             </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class=nav-link asp-area="Customer" asp-controller="Cart" asp-action="Index">
+                                <i class="bi bi-cart"></i>
+                            </a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />

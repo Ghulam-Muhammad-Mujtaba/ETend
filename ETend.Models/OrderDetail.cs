@@ -9,22 +9,21 @@ using System.Threading.Tasks;
 
 namespace ETend.Models
 {
-    public class ShoppingCart
+    public class OrderDetail
     {
         public int Id { get; set; }
+        [Required]
+        public int OrderId { get; set; }
+        [ForeignKey("OrderId")]
+        [ValidateNever]
+        public OrderHeader OrderHeader { get; set; }
+
+        [Required]
         public int ProductId { get; set; }
         [ForeignKey("ProductId")]
         [ValidateNever]
         public Product Product { get; set; }
-        [Range(3, 1000, ErrorMessage = "Please enter a value between 3 and 100")]
         public int Count { get; set; }
-
-        public string CustomerId { get; set; }
-        [ForeignKey("CustomerId")]
-        [ValidateNever]
-        public Customer Customer { get; set; }
-
-        [NotMapped]
         public double Price { get; set; }
     }
 }
