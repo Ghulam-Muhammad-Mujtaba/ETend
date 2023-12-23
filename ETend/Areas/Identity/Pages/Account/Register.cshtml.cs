@@ -116,11 +116,13 @@ namespace ETend.Areas.Identity.Pages.Account
 
         public async Task OnGetAsync(string returnUrl = null)
         {
-            if (!_roleManager.RoleExistsAsync(Constants.Constants.Role_Admin).GetAwaiter().GetResult())
+            if (!_roleManager.RoleExistsAsync(Constants.Constants.Role_Driver).GetAwaiter().GetResult())
             {
                 _roleManager.CreateAsync(new IdentityRole(Constants.Constants.Role_Admin)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(Constants.Constants.Role_Employee)).GetAwaiter().GetResult();
                 _roleManager.CreateAsync(new IdentityRole(Constants.Constants.Role_User_Indi)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Constants.Constants.Role_Retailer)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(Constants.Constants.Role_Driver)).GetAwaiter().GetResult();
             }
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();

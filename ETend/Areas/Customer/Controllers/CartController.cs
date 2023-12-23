@@ -85,8 +85,8 @@ namespace ETend.Areas.Customer.Controllers
 
             ShoppingCartVM.OrderHeader.Customer = _unitOfWork.Customer.GetFirstOrDefault(
                 u => u.Id == claim.Value);
-            ShoppingCartVM.OrderHeader.PaymentStatus = ETend.Constants.Constants.PaymentStatusPending;
-            ShoppingCartVM.OrderHeader.OrderStatus = ETend.Constants.Constants.StatusPending;
+            ShoppingCartVM.OrderHeader.PaymentStatus = Constants.Constants.PaymentStatusPending;
+            ShoppingCartVM.OrderHeader.OrderStatus = Constants.Constants.StatusPending;
             ShoppingCartVM.OrderHeader.OrderDate = System.DateTime.Now;
             ShoppingCartVM.OrderHeader.OrderMethod = "Card";
             ShoppingCartVM.OrderHeader.CustomerId = claim.Value;
@@ -164,7 +164,7 @@ namespace ETend.Areas.Customer.Controllers
             if (session.PaymentStatus.ToLower() == "paid")
             {
                 _unitOfWork.OrderHeader.UpdateStripePaymentID(id, orderHeader.SessionId, session.PaymentIntentId);
-                _unitOfWork.OrderHeader.UpdateStatus(id, ETend.Constants.Constants.StatusApproved, ETend.Constants.Constants.PaymentStatusApproved);
+                _unitOfWork.OrderHeader.UpdateStatus(id, Constants.Constants.StatusApproved, Constants.Constants.PaymentStatusApproved);
                 _unitOfWork.Save();
             }
             //Remove the shopping cart if the payment is made
@@ -172,6 +172,7 @@ namespace ETend.Areas.Customer.Controllers
             orderHeader.CustomerId).ToList();
             _unitOfWork.ShoppingCart.RemoveRange(shoppingCarts);
             HttpContext.Session.Clear();
+
             // Retrieve order details from the database
             List<OrderDetail> orderDetails = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == id, includeProperties: "Product").ToList();
 
@@ -210,7 +211,7 @@ namespace ETend.Areas.Customer.Controllers
             {
                 _unitOfWork.ShoppingCart.Remove(cart);
                 var count = _unitOfWork.ShoppingCart.GetAll(u => u.CustomerId == cart.CustomerId).ToList().Count - 1;
-                HttpContext.Session.SetInt32(ETend.Constants.Constants.SessionCart, count);
+                HttpContext.Session.SetInt32(Constants.Constants.SessionCart, count);
             }
             else
             {
@@ -226,10 +227,9 @@ namespace ETend.Areas.Customer.Controllers
             _unitOfWork.ShoppingCart.Remove(cart);
             _unitOfWork.Save();
             var count = _unitOfWork.ShoppingCart.GetAll(u => u.CustomerId == cart.CustomerId).ToList().Count;
-            HttpContext.Session.SetInt32(ETend.Constants.Constants.SessionCart, count);
+            HttpContext.Session.SetInt32(Constants.Constants.SessionCart, count);
             return RedirectToAction(nameof(Index));
         }
-
 
     }
 }

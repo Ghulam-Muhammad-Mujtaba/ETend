@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.UI.Services;
+using MailKit.Net.Smtp;
+using MimeKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -26,11 +27,12 @@ namespace ETend.Constants
         //    using (var emailClient = new SmtpClient()) //using MailKit.Net.Smtp;
         //    {
         //        emailClient.Connect("smtp.gmail.com", 587, MailKit.Security.SecureSocketOptions.StartTls);
-        //        emailClient.Authenticate("Your email", "16-digit code or password");
+        //        emailClient.Authenticate("gmmujtaba21@gmail.com", "kkodnqjowwyleusv");
         //        emailClient.Send(emailToSend);
         //        emailClient.Disconnect(true);
         //    }
         //    return Task.CompletedTask;
         //}
+
     }
 }

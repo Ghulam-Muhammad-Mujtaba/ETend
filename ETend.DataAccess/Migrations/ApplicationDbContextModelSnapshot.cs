@@ -39,7 +39,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Areas");
+                    b.ToTable("Areas", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.Company", b =>
@@ -69,7 +69,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("Companies");
+                    b.ToTable("Companies", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.Driver", b =>
@@ -99,7 +99,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("VehicleId");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("Drivers", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.House", b =>
@@ -125,7 +125,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("Houses");
+                    b.ToTable("Houses", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.OrderDetail", b =>
@@ -154,7 +154,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("OrderDetails");
+                    b.ToTable("OrderDetails", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.OrderHeader", b =>
@@ -232,7 +232,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("ApplicationUserId");
 
-                    b.ToTable("OrderHeaders");
+                    b.ToTable("OrderHeaders", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.Product", b =>
@@ -263,7 +263,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.RetailShop", b =>
@@ -297,7 +297,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("AreaId");
 
-                    b.ToTable("RetailShops");
+                    b.ToTable("RetailShops", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.ShoppingCart", b =>
@@ -324,7 +324,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ShoppingCarts");
+                    b.ToTable("ShoppingCarts", (string)null);
                 });
 
             modelBuilder.Entity("ETend.Models.Vehicle", b =>
@@ -353,7 +353,7 @@ namespace ETend.DataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Vehicles");
+                    b.ToTable("Vehicles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

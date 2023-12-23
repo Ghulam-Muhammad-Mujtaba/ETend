@@ -21,7 +21,7 @@ namespace ETend.Areas.Admin.Controllers
         {
             _unitOfWork = unitOfWork;
         }
-
+        [Authorize(Roles = Constants.Constants.Role_Admin + "," + Constants.Constants.Role_Driver + "," + Constants.Constants.Role_User_Indi)]
         public IActionResult Index()
         {
             return View();
@@ -31,8 +31,8 @@ namespace ETend.Areas.Admin.Controllers
         {
             OrderVM = new OrderVM()
             {
-                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "ApplicationUser"),
-                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == orderId, includeProperties: "Product,Product.Brand"),
+                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "Customer"),
+                OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == orderId, includeProperties: "Product"),
             };
             return View(OrderVM);
         }
@@ -92,6 +92,23 @@ namespace ETend.Areas.Admin.Controllers
             TempData["Success"] = "Order Shipped Successfully.";
             return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id });
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = Constants.Constants.Role_Driver)]
+
+        public IActionResult DeliveredOrder()
+        {
+            var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id, tracked: false);
+            orderHeader.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
+            orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
+            orderHeader.OrderStatus = Constants.Constants.StatusDelivered;
+            orderHeader.ShippingDate = OrderVM.OrderHeader.ShippingDate;
+
+            _unitOfWork.OrderHeader.Update(orderHeader);
+            _unitOfWork.Save();
+            TempData["Success"] = "Order Delivered Successfully.";
+            return RedirectToAction("Details", "Order", new { orderId = OrderVM.OrderHeader.Id });
+        }
 
         [HttpPost]
         [Authorize(Roles = Constants.Constants.Role_Admin + "," + Constants.Constants.Role_Employee)]
@@ -130,7 +147,7 @@ namespace ETend.Areas.Admin.Controllers
             if (User.IsInRole(Constants.Constants.Role_Admin) || User.IsInRole(Constants.Constants.Role_Employee))
             {
                 //For Admin
-                orderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "ApplicationUser");
+                orderHeaders = _unitOfWork.OrderHeader.GetAll(includeProperties: "Customer");
             }
             else
             {
@@ -152,6 +169,9 @@ namespace ETend.Areas.Admin.Controllers
                     break;
                 case "approved":
                     orderHeaders = orderHeaders.Where(u => u.OrderStatus == Constants.Constants.StatusApproved);
+                    break;
+                case "delivered":
+                    orderHeaders = orderHeaders.Where(u => u.OrderStatus == Constants.Constants.StatusDelivered);
                     break;
                 default:
                     break;

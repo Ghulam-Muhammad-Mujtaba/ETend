@@ -13,9 +13,14 @@ namespace ETend.Models
     {
         public int Id { get; set; }
         public string CustomerId { get; set; }
-        [ForeignKey("ApplicationUserId")]
+        [ForeignKey("CustomerId")]
         [ValidateNever]
         public Customer Customer { get; set; }
+
+        //public int DriverId { get; set; }
+        //[ForeignKey("DriverId")]
+        //[ValidateNever]
+        //public Driver Driver { get; set; }
 
         [Required]
         public DateTime OrderDate { get; set; }

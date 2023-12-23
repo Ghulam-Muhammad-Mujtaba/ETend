@@ -10,5 +10,6 @@ namespace ETend.Models.ViewModels
     {
         public OrderHeader OrderHeader { get; set; }
         public IEnumerable<OrderDetail> OrderDetail { get; set; }
+        //public IEnumerable<Driver> Driver { get; set; }
     }
 }
