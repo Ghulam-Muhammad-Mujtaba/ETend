@@ -17,11 +17,14 @@ namespace ETend.Models
         [ValidateNever]
         public Customer Customer { get; set; }
 
-        //public int DriverId { get; set; }
-        //[ForeignKey("DriverId")]
-        //[ValidateNever]
-        //public Driver Driver { get; set; }
-
+        public int? DriverId { get; set; }
+        [ForeignKey("DriverId")]
+        [ValidateNever]
+        public Driver? Driver { get; set; }
+        public int? AreaId { get; set; }
+        [ForeignKey("AreaId")]
+        [ValidateNever]
+        public Area? Area { get; set; }
         [Required]
         public DateTime OrderDate { get; set; }
         public DateTime ShippingDate { get; set; }
@@ -29,7 +32,7 @@ namespace ETend.Models
         public string? OrderStatus { get; set; }
         public string? PaymentStatus { get; set; }
         public string? TrackingNumber { get; set; }
-        public string? Carrier { get; set; }
+        //public string? Carrier { get; set; } Display list of drivers instead
         public DateTime PaymentDate { get; set; }
         public DateTime PaymentDueDate { get; set; }
         public string? OrderMethod { get; set; } //E-Wallet coins Or Card

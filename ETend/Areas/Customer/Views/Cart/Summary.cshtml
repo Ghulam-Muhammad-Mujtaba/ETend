@@ -71,6 +71,17 @@
                                 <span asp-validation-for="OrderHeader.PostalCode" class="text-danger"></span>
                             </div>
                         </div>
+                        <div class="row my-1">
+                            <div class="col-3">
+                                <label>Area</label>
+                            </div>
+                            <div class="col-9">
+                                <select asp-for="OrderHeader.AreaId" asp-items="@Model.AreaList" class="form-select">
+                                    <option disabled selected>--Select Area--</option>
+                                </select>
+                                <span asp-validation-for="OrderHeader.AreaId" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
                     <div class="col-12 col-lg-5 offset-lg-1">
                         <h4 class="d-flex justify-content-between align-items-center mb-3">

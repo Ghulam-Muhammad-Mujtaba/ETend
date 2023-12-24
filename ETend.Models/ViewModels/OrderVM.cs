@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,9 @@ namespace ETend.Models.ViewModels
     {
         public OrderHeader OrderHeader { get; set; }
         public IEnumerable<OrderDetail> OrderDetail { get; set; }
-        //public IEnumerable<Driver> Driver { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> DriverList { get; set; }
+        [ValidateNever]
+        public IEnumerable<SelectListItem> AreaList { get; set; }
     }
 }

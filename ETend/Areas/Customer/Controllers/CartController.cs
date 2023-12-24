@@ -4,7 +4,9 @@ using ETend.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Stripe.Checkout;
+using System.Collections;
 using System.Diagnostics;
 using System.Security.Claims;
 using System.Text;
@@ -53,8 +55,14 @@ namespace ETend.Areas.Customer.Controllers
             {
                 ListCart = _unitOfWork.ShoppingCart.GetAll(u => u.CustomerId == claim.Value,
                 includeProperties: "Product"),
+                AreaList = _unitOfWork.Area.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
                 OrderHeader = new()
             };
+
 
             ShoppingCartVM.OrderHeader.Customer = _unitOfWork.Customer.GetFirstOrDefault(
                 u => u.Id == claim.Value);

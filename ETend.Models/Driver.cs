@@ -16,6 +16,7 @@ namespace ETend.Models
 		public int Id { get; set; }
 
 		[Required]
+		[DisplayName("Vehicle Name")]
 		public int VehicleId { get; set; }
 
 		[ForeignKey("VehicleId")]

@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Stripe;
 using System.Security.Claims;
+using ETend.Constants;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace ETend.Areas.Admin.Controllers
 {
@@ -31,8 +33,13 @@ namespace ETend.Areas.Admin.Controllers
         {
             OrderVM = new OrderVM()
             {
-                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "Customer"),
+                OrderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == orderId, includeProperties: "Customer,Driver"),
                 OrderDetail = _unitOfWork.OrderDetail.GetAll(u => u.OrderId == orderId, includeProperties: "Product"),
+                DriverList = _unitOfWork.Driver.GetAll().Select(i => new SelectListItem
+                {
+                    Text = i.DriverName,
+                    Value = i.Id.ToString()
+                }),
             };
             return View(OrderVM);
         }
@@ -49,9 +56,9 @@ namespace ETend.Areas.Admin.Controllers
             orderHEaderFromDb.StreetAddress = OrderVM.OrderHeader.StreetAddress;
             orderHEaderFromDb.City = OrderVM.OrderHeader.City;
             orderHEaderFromDb.PostalCode = OrderVM.OrderHeader.PostalCode;
-            if (OrderVM.OrderHeader.Carrier != null)
+            if (OrderVM.OrderHeader.Driver != null)
             {
-                orderHEaderFromDb.Carrier = OrderVM.OrderHeader.Carrier;
+                orderHEaderFromDb.Driver = OrderVM.OrderHeader.Driver;
             }
             if (OrderVM.OrderHeader.TrackingNumber != null)
             {
@@ -83,7 +90,7 @@ namespace ETend.Areas.Admin.Controllers
         {
             var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id, tracked: false);
             orderHeader.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
-            orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
+            orderHeader.Driver = OrderVM.OrderHeader.Driver;
             orderHeader.OrderStatus = Constants.Constants.StatusShipped;
             orderHeader.ShippingDate = DateTime.Now;
 
@@ -100,7 +107,7 @@ namespace ETend.Areas.Admin.Controllers
         {
             var orderHeader = _unitOfWork.OrderHeader.GetFirstOrDefault(u => u.Id == OrderVM.OrderHeader.Id, tracked: false);
             orderHeader.TrackingNumber = OrderVM.OrderHeader.TrackingNumber;
-            orderHeader.Carrier = OrderVM.OrderHeader.Carrier;
+            orderHeader.Driver = OrderVM.OrderHeader.Driver;
             orderHeader.OrderStatus = Constants.Constants.StatusDelivered;
             orderHeader.ShippingDate = OrderVM.OrderHeader.ShippingDate;
 

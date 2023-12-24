@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.ComponentModel;
 
 namespace ETend.Models
 {
@@ -15,21 +16,27 @@ namespace ETend.Models
 		public int Id { get; set; }
 
 		[Required]
-		public int AreaId { get; set; }
+        [DisplayName("Area Name")]
+        public int AreaId { get; set; }
 
 		[ForeignKey("AreaId")]
 		[ValidateNever]
 		public Area Area { get; set; }
 
 		[Required]
+		[DisplayName("Shop Name")]
 		public string ShopName { get; set; }
 
 		[Required]
-		public string ShopOwner { get; set; }
+        [DisplayName("Shop Owner")]
+        public string ShopOwner { get; set; }
 
 		[Required]
-		public string ShopAddress { get; set; }
+        [DisplayName("Shop Address")]
+        public string ShopAddress { get; set; }
 		[Required]
-		public string PhoneNumber { get; set; }
+        [DisplayName("Phone No.")]
+
+        public string PhoneNumber { get; set; }
 	}
 }

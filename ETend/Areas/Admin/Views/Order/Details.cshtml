@@ -111,15 +111,17 @@
                                 </div>
                             </div>
                             <div class="row my-1">
-                                <div class="col-3">Carrier</div>
+                                <div class="col-3">Driver</div>
                                 <div class="col-9">
                                     @if (User.IsInRole(Constants.Role_Admin) || User.IsInRole(Constants.Role_Employee))
                                     {
-                                        <input asp-for="OrderHeader.Carrier" id="carrier" type="text" class="form-control" />
+                                        <select asp-for="OrderHeader.DriverId" id="driver" asp-items="@Model.DriverList" class="form-select">
+                                            <option disabled selected>--Select Category--</option>
+                                        </select>
                                     }
                                     else
                                     {
-                                        <input asp-for="OrderHeader.Carrier" readonly type="text" class="form-control" />
+                                        <input asp-for="@Model.OrderHeader.DriverId" readonly type="text" class="form-control" />
                                     }
                                 </div>
                             </div>
@@ -183,7 +185,7 @@
                             </div>
                             @if (User.IsInRole(Constants.Role_Admin))
                             {
-                            <input type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1" value="Update Order Details" />
+                                <input type="submit" asp-action="UpdateOrderDetail" class="btn btn-warning form-control my-1" value="Update Order Details" />
                             }
 
                         </div>
@@ -243,11 +245,11 @@
                                     <input asp-action="CancelOrder" type="submit" class="btn btn-danger form-control my-1" value="Cancel Order" />
                                 }
                             }
-                            @if(User.IsInRole(Constants.Role_Driver))
+                            @if (User.IsInRole(Constants.Role_Driver))
                             {
-                                if(Model.OrderHeader.OrderStatus == Constants.StatusShipped)
+                                if (Model.OrderHeader.OrderStatus == Constants.StatusShipped)
                                 {
-                                    
+
                                 }
                             }
                         </div>
@@ -270,11 +272,11 @@
                 });
                 return false;
             }
-            if (document.getElementById("carrier").value == "") {
+            if (document.getElementById("driver").value == "") {
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Please enter carrier!',
+                    text: 'Please enter driver!',
                 });
                 return false;
             }
